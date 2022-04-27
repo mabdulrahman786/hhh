@@ -1,18 +1,30 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+<?php
+// database connection code
+if(isset($_POST['txtName']))
+{
+// $con = mysqli_connect('localhost', 'database_user', 'database_password','database');
+$con = mysqli_connect('0.0.0.0:3306', 'root', 'root','db_contact');
 
-# Other files and folders
-.settings/
+// get the post records
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+$txtName = $_POST['txtName'];
+$txtEmail = $_POST['txtEmail'];
+$txtPhone = $_POST['txtPhone'];
+$txtMessage = $_POST['txtMessage'];
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+// database insert SQL code
+$sql = "INSERT INTO `tbl_contact` (`Id`, `fldName`, `fldEmail`, `fldPhone`, `fldMessage`) VALUES ('0', '$txtName', '$txtEmail', '$txtPhone', '$txtMessage')";
+
+// insert in database 
+$rs = mysqli_query($con, $sql);
+if($rs)
+{
+	echo "Contact Records Inserted";
+}
+}
+else
+{
+	echo "Are you a genuine visitor?";
+	
+}
+?>
